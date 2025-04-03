@@ -1,19 +1,19 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: moderna-template
+  name: modernaMuon-template
 spec:
-  displayName: Moderna
+  displayName: Moderna Muon
   author:
-    name: shrChang.Liu
-    website: "https://github.com/liuchangfitcloud"
+    name: shrChang.Liu -> iYu
+    website: "https://github.com/WeiMXi/theme-moderna"
   description: Moderna html5 template for Halo
   logo: "/themes/moderna-template/assets/img/favicon.png"
-  website: "https://halo.run"
-  repo: "https://github.com/liuchangfitcloud/theme-moderna"
+  website: "https://muonscience.com"
+  repo: "https://github.com/WeiMXi/theme-moderna"
   settingName: "theme-moderna-setting"
   configMapName: "theme-moderna-configMap"
-  version: "1.0.0"
+  version: "1.0.1"
   require: ">=2.0.0"
   customTemplates:
     page:
@@ -21,8 +21,8 @@ spec:
         description: 关于我们
         screenshot:
         file: about.html
-      - name: 服务
-        description: 服务
+      - name: 产品
+        description: 产品
         screenshot:
         file: services.html
       - name: 团队
@@ -37,3 +37,7 @@ spec:
         description: 博客
         screenshot:
         file: blog.html
+      - name: 诚聘英才
+        description: 诚聘英才
+        screenshot:
+        file: jobs.html

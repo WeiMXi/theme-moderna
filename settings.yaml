@@ -57,7 +57,7 @@ spec:
         - $formkit: repeater
           if: "$get(show_home_card).value"
           name: service
-          label: 企业文化
+          label: 技术特点
           help: 必须是四个的排版 目前不支持其他的
           value: 
             - icon: bxl-dribbble
@@ -132,11 +132,12 @@ spec:
               name: desc
               label: 描述
               value: 
+        # 其他配置保持不变...
         - $formkit: radio
           name: show_features
           id: show_home_features
           key: show_home_features
-          label: 显示特点块
+          label: 显示荣誉证书块  # 修改标签
           value: true
           options:
             - label: 是
@@ -147,67 +148,37 @@ spec:
           if: "$get(show_home_features).value"
           name: features_title
           label: 标题
-          value: 优势
+          value: 荣誉资质  # 默认标题
         - $formkit: text
           if: "$get(show_home_features).value"
           name: features_desc
           label: 描述
-          value: 我们有最强的团队、非凡的执行力和团结的凝聚力，我们也必将成为世界一流的软件服务公司。
+          value: 我们凭借卓越的产品和服务，荣获以下权威认证。  # 默认描述
         - $formkit: repeater
           if: "$get(show_home_features).value"
           name: features_items
-          label: 优势条目
+          label: 荣誉证书条目  # 修改标签
+          help: 上传荣誉证书图片并填写描述
           value: 
-            - img: /themes/moderna-template/assets/img/features-1.svg
-              title: 努力成为世界第一
-              desc: 我们坚信我们将超越世界上所有的公司
-              items:
-                - desc: 服务第一
-                - desc: 质量第一
-                - desc: 福利第一
-            - img: /themes/moderna-template/assets/img/features-2.svg
-              title: 努力成为世界第一
-              desc: 我们坚信我们将超越世界上所有的公司
-              items:
-                - desc: 服务第一
-                - desc: 质量第一
-                - desc: 福利第一
-            - img: /themes/moderna-template/assets/img/features-3.svg
-              title: 努力成为世界第一
-              desc: 我们坚信我们将超越世界上所有的公司
-              items:
-                - desc: 服务第一
-                - desc: 质量第一
-                - desc: 福利第一
-            - img: /themes/moderna-template/assets/img/features-4.svg
-              title: 努力成为世界第一
-              desc: 我们坚信我们将超越世界上所有的公司
-              items:
-                - desc: 服务第一
-                - desc: 质量第一
-                - desc: 福利第一            
+            - img: /themes/moderna/static/images/honor1.jpg  # 默认图片路径
+              title: 年度创新企业奖
+              desc: 2023年由科技部颁发
+            - img: /themes/moderna/static/images/honor2.jpg
+              title: 行业质量金奖
+              desc: 2022年获得国际认证
           children: 
             - $formkit: attachment
               name: img
-              label: 图片
+              label: 证书图片
               value: 
             - $formkit: text
               name: title
-              label: 标题
+              label: 证书标题
               value:
             - $formkit: text
               name: desc
-              label: 描述
+              label: 证书描述
               value: 
-            - $formkit: repeater
-              name: items
-              label: 描述条目
-              value: []
-              children:
-                - $formkit: text
-                  name: desc
-                  label: 描述
-                  value: ""   
     - group: about
       label: 关于我们
       formSchema:
@@ -372,7 +343,7 @@ spec:
               name: content
               label: 内容    
     - group: service
-      label: 服务
+      label: 产品
       formSchema:
         - $formkit: radio
           help: 这个主要是用服务那个自定义模版下面的配置注意啦
@@ -410,7 +381,7 @@ spec:
           name: service_items
           id: service_items
           key: service_items
-          label: 企业文化
+          label: 技术特点
           help: 建议2/4个数据否则会导致排版出现问题
           value: 
             - icon: bxl-dribbble
@@ -735,6 +706,157 @@ spec:
           label: 最新条目显示数量
           validation: "required"
           value: 6       
+    - group: career
+      label: 诚聘英才
+      formSchema:
+        - $formkit: radio
+          name: show
+          id: show_career
+          key: show_career
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false 
+          label: 是否显示
+          value: false
+        - $formkit: singlePageSelect
+          if: "$get(show_career).value"
+          name: page
+          label: 选择自定义界面
+          validation: "required"
+          value: 
+          help: 必须选择诚聘英才模版的自定义页面,否则下面的配置将会失效。
+        
+        # 公司简介部分
+        - $formkit: radio
+          if: "$get(show_career).value"
+          name: show_intro
+          id: show_career_intro
+          key: show_career_intro
+          label: 显示公司简介
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: textarea
+          if: "$get(show_career).value && $get(show_career_intro).value"
+          name: intro_desc
+          label: 公司简介内容
+          value: "我们是一家专注于企业级软件研发的高科技公司，致力于为全球客户提供优质的软件产品和解决方案。"
+        
+        # 招聘岗位部分
+        - $formkit: radio
+          if: "$get(show_career).value"
+          name: show_positions
+          id: show_career_positions
+          key: show_career_positions
+          label: 显示招聘岗位
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: repeater
+          if: "$get(show_career).value && $get(show_career_positions).value"
+          name: position_items
+          id: position_items
+          key: position_items
+          label: 招聘岗位列表
+          value: 
+            - icon: bx-code-alt
+              title: 高级Java开发工程师
+              responsibilities: "1. 负责公司核心产品的开发与维护<br>2. 参与系统架构设计与优化<br>3. 编写高质量的代码和文档"
+              requirements: "1. 5年以上Java开发经验<br>2. 精通Spring框架<br>3. 熟悉分布式系统设计"
+            - icon: bx-palette
+              title: UI设计师
+              responsibilities: "1. 负责产品界面设计<br>2. 参与用户体验优化<br>3. 制作设计规范和组件库"
+              requirements: "1. 3年以上UI设计经验<br>2. 熟练使用Sketch/Figma<br>3. 有良好的审美能力"
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              help: 选择boxicons的icon样式
+              value: ""
+            - $formkit: text
+              name: title
+              label: 岗位名称
+              value: ""
+            - $formkit: textarea
+              name: responsibilities
+              label: 岗位职责
+              help: 每条职责用<br>分隔
+              value: ""
+            - $formkit: textarea
+              name: requirements
+              label: 任职要求
+              help: 每条要求用<br>分隔
+              value: ""
+        
+        # 招聘流程部分
+        - $formkit: radio
+          if: "$get(show_career).value"
+          name: show_process
+          id: show_career_process
+          key: show_career_process
+          label: 显示招聘流程
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: textarea
+          if: "$get(show_career).value && $get(show_career_process).value"
+          name: process_desc
+          label: 流程描述
+          value: "我们采用标准化的招聘流程，确保公平公正地评估每一位候选人。"
+        - $formkit: repeater
+          if: "$get(show_career).value && $get(show_career_process).value"
+          name: process_items
+          id: process_items
+          key: process_items
+          label: 流程步骤
+          value: 
+            - title: 简历筛选
+              desc: "HR将在3个工作日内完成简历筛选"
+            - title: 技术面试
+              desc: "通过电话或现场方式进行技术能力评估"
+            - title: 综合面试
+              desc: "与团队负责人和管理层进行深入交流"
+            - title: 录用通知
+              desc: "通过所有面试环节后发放正式offer"
+          children:
+            - $formkit: text
+              name: title
+              label: 步骤名称
+              value: ""
+            - $formkit: text
+              name: desc
+              label: 步骤描述
+              value: ""
+        # 应聘须知部分
+        - $formkit: radio
+          if: "$get(show_career).value"
+          name: show_notes
+          id: show_career_notes
+          key: show_career_notes
+          label: 显示应聘须知
+          value: true
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        - $formkit: code
+          if: "$get(show_career).value && $get(show_career_notes).value"
+          name: notes_content
+          label: 应聘须知内容
+          value: "1.有意应聘者，请将个人简历、相关资格证书电子版发送至指定邮箱：xxx@email.com。邮件主题注明：姓名+应聘职位。联系电话：888（xx小姐）\n2.应聘人员须如实提交有关信息和材料，凡提供虚假信息这，一经查实，即取消录用资格。"
+          help: "每条须知用换行分隔"
     - group: contact
       label: 联系我们
       formSchema:

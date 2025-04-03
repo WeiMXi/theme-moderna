@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{modules/import}" />
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <th:block th:replace="~{modules/header::goPage(${singlePage.spec.slug})}" />
+    <!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 th:text="${singlePage.spec.title}"></h2>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li th:text="${singlePage.spec.title}"></li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs Section -->
+
+        <!-- ======= Company Intro Section ======= -->
+        <section class="about" th:if="${theme.config.career.show_intro}">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>公司简介</h2>
+                    <p th:text="${theme.config.career.intro_desc}"></p>
+                </div>
+            </div>
+        </section><!-- End Company Intro Section -->
+
+        <!-- ======= Positions Section ======= -->
+        <section class="services section-bg" th:if="${theme.config.career.show_positions}">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>招聘岗位</h2>
+                    <p>我们正在寻找优秀人才加入我们的团队</p>
+                </div>
+
+                <div class="row">
+                    <div th:each="position,posStat:${theme.config.career.position_items}"
+                        class="col-lg-6 col-md-6 d-flex align-items-stretch" th:data-aos-delay="${posStat.index}*100"
+                        data-aos="fade-up">
+                        <div class="icon-box">
+                            <div class="icon"><i th:class="${position.icon} + ' bx'"></i></div>
+                            <h4 class="title" th:text="${position.title}"></h4>
+                            <h5>岗位职责</h5>
+                            <p class="description" th:utext="${position.responsibilities}"></p>
+                            <h5>任职要求</h5>
+                            <p class="description" th:utext="${position.requirements}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Positions Section -->
+
+        <!-- ======= Hiring Process Section ======= -->
+        <section class="why-us" th:if="${theme.config.career.show_process}">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>招聘流程</h2>
+                    <p th:text="${theme.config.career.process_desc}"></p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="process-steps">
+                            <div th:each="step,stepStat:${theme.config.career.process_items}" class="process-step"
+                                th:data-aos-delay="${stepStat.index}*100" data-aos="fade-up">
+                                <div class="step-number" th:text="${stepStat.index + 1}"></div>
+                                <div class="step-content">
+                                    <h4 th:text="${step.title}"></h4>
+                                    <p th:text="${step.desc}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Hiring Process Section -->
+
+        <!-- ======= Application Notes Section ======= -->
+        <section class="services section-bg" th:if="${theme.config.career.show_notes}">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>应聘须知</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="application-notes" th:utext="${theme.config.career.notes_content}"></div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Application Notes Section -->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <th:block th:replace="~{modules/footer}" />
+    <!-- End Footer -->
+</body>
+
+</html>

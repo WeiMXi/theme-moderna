@@ -18,10 +18,13 @@
         <li><a th:if="${theme.config.team.show}" th:with="team = ${singlePageFinder.getByName(theme.config.team.page)}"
             th:class="${page==team.spec.slug} ? 'active' : '' " th:href="@{'/' + ${team.spec.slug}}"
             th:text="${team.spec.title}"></a></li>
-        <li><a th:if="${theme.config.blog.show}"
-            th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}"
+        <li><a th:if="${theme.config.blog.show}" th:with="blog = ${singlePageFinder.getByName(theme.config.blog.page)}"
             th:class="${page==blog.spec.slug} ? 'active' : '' " th:href="@{'/' + ${blog.spec.slug}}"
             th:text="${blog.spec.title}"></a></li>
+        <li><a th:if="${theme.config.career.show}"
+            th:with="career = ${singlePageFinder.getByName(theme.config.career.page)}"
+            th:class="${page==career.spec.slug} ? 'active' : '' " th:href="@{'/' + ${career.spec.slug}}"
+            th:text="${career.spec.title}"></a></li>
         <li><a th:if="${theme.config.contact.show}"
             th:with="contact = ${singlePageFinder.getByName(theme.config.contact.page)}"
             th:class="${page==contact.spec.slug} ? 'active' : '' " th:href="@{'/' + ${contact.spec.slug}}"
